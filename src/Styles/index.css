@@ -56,7 +56,7 @@ body{
 }
 
 @keyframes fade-in {
-  from {filter:brightness(0)};
+  from {filter:brightness(10%)};
   to {filter: brightness(90%)};
 }
 
