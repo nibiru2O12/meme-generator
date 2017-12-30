@@ -2,6 +2,8 @@ import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import {Form,FormGroup,FormControl,ControlLabel,Button} from 'react-bootstrap';
 import MemeItem from './MemeItem';
+import MyMeme from './MyMeme';
+
 import {captionMeme} from '../Actions';
 
 class MemeGenerator extends Component{
@@ -36,7 +38,7 @@ class MemeGenerator extends Component{
 
   render(){
 
-    const {memes} = this.props;
+    const {memes,myMemes} = this.props;
     const {memeLimit  } = this.state;
     const limitedMemes = memes.slice(0,memeLimit);
     let LoadMore = (
@@ -51,6 +53,13 @@ class MemeGenerator extends Component{
 
     return(
       <div>
+        {
+          myMemes.map(meme=>{
+            return (
+              <MyMeme meme={meme} />
+            )
+          })
+        }
         <Form inline>
           <FormGroup>
             <ControlLabel>Top</ControlLabel>{' '}
