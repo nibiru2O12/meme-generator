@@ -1,15 +1,28 @@
 import React,{Component} from 'react';
+import {connect} from 'react-redux';
 import MemeSelectionItem from './MemeSelectionItem';
 
 class MemeSelection extends Component{
 
   render(){
+    let {memes} = this.props;
     return (
-      <div>
-        <MemeSelectionItem />
-      </div>
+      memes.map(meme=>{
+        return (
+          <MemeSelectionItem key={meme.id}
+            name={meme.name}
+            url={meme.url}
+          />
+        )
+      })
     )
   }
 }
 
-export default MemeSelection;
+const mapStateToProps = state =>{
+  return {
+    memes:state.memes
+  }
+}
+
+export default connect(mapStateToProps,null)(MemeSelection);

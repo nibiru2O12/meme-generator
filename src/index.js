@@ -9,7 +9,7 @@ import {fetch_memeData} from './Actions';
 import App from './Components/App';
 
 const store=createStore(RootReducers,applyMiddleware(thunk))
-store.subscribe(()=>console.log(store.getState()));
+store.subscribe(()=>console.log('subscribe : ',store.getState()));
 store.dispatch(fetch_memeData());
 
 const rootDocument = document.getElementById('root');
