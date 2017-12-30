@@ -1,15 +1,33 @@
 import React,{Component} from 'react';
+import {connect} from 'react-redux';
 import {Form,FormGroup,FormControl,ControlLabel,Button} from 'react-bootstrap';
-import MemeSelection from './MemeSelection';
+import MemeItem from './MemeItem';
+import {captionMeme} from '../Actions';
 
 class MemeGenerator extends Component{
-
   constructor(){
     super();
     this.state={
       text0:'',
-      text1:''
+      text1:'',
+      memeLimit:2
     }
+  }
+
+  handleLoadMore(){
+    const currentLimit = parseInt(this.state.memeLimit);
+    this.setState({
+      memeLimit : currentLimit + 2
+    });
+  }
+
+  handleCaptionMeme(meme){
+    const {text0,text1} = this.state;
+    const newMeme = {
+      text0,text1,
+      template_id:meme.id
+    }
+    this.props.captionMeme(newMeme);
   }
 
   handleTextChange(e){
@@ -17,6 +35,20 @@ class MemeGenerator extends Component{
   }
 
   render(){
+
+    const {memes} = this.props;
+    const {memeLimit  } = this.state;
+    const limitedMemes = memes.slice(0,memeLimit);
+    let LoadMore = (
+      <div className="meme-button"
+        onClick={this.handleLoadMore.bind(this)}>
+        load more...
+      </div>
+    );
+    if(memes.length <= memeLimit){
+      LoadMore=null
+    }
+
     return(
       <div>
         <Form inline>
@@ -39,10 +71,18 @@ class MemeGenerator extends Component{
             />
           </FormGroup>
         </Form>
-        <MemeSelection limit='2' />
+        {
+          limitedMemes.map(meme =>{
+            return (
+              <MemeItem key={meme.id} meme={meme} onMemeClick={this.handleCaptionMeme.bind(this)} />
+            )
+          })
+        }
+        {LoadMore}
       </div>
     )
   }
 }
 
-export default MemeGenerator;
+const mapStateToProps = state => state;
+export default connect(mapStateToProps,{captionMeme})(MemeGenerator);

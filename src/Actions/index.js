@@ -1,6 +1,6 @@
 import {username,password} from '../Credentials';
 export const FETCH_MEMEDATA = "FETCH_MEMEDATA";
-export const CAPTION_MEME="CAPTION_MEME";
+export const NEW_MEME="NEW_MEME";
 
 function receivedMemeData(json){
   const {memes}=json.data;
@@ -23,27 +23,34 @@ export function fetch_memeData(){
 
 }
 
-function captionedMeme(orig,json){
+function captionedMeme(meme){
   const action={
-    type:CAPTION_MEME,
-    json
+    type:NEW_MEME,
+    meme
   }
+  console.log('newMeme',meme);
   return action
 }
 
-export function captionMeme(meme,text0,text1){
-  const url='https://api.imgflip.com/caption_image';
+export function captionMeme(meme){
+  meme['username']=username;
+  meme['password']=password;
 
+  const bodyParams = Object.keys(meme).map(key=>{
+    return encodeURIComponent(key) + '=' + encodeURIComponent(meme[key]);
+  }).join('&');
+  console.log(meme,bodyParams);
+
+  const url='https://api.imgflip.com/caption_image';
   return function(dispatch){
     return fetch(url,{
       method:"POST",
-      username:username,
-      password:password,
-      template_id:meme.id,
-      text0:text0,
-      text1:text1
+      headers:{
+        'Content-Type':'application/x-www-form-urlencoded'
+      },
+      body:bodyParams
     })
     .then(response => response.json())
-    .then(json => dispatch(meme,json) )
+    .then(json => dispatch(captionedMeme(json)) )
   }
 }
