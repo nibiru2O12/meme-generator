@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
-import MemeSelectionItem from './MemeSelectionItem';
+import MemeItem from './MemeItem';
 
 class MemeSelection extends Component{
 
@@ -10,7 +10,7 @@ class MemeSelection extends Component{
     return (
       memes.map(meme=>{
        return (
-          <MemeSelectionItem
+          <MemeItem
             key={meme.id} meme={meme}
           />
         )

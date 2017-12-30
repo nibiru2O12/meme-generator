@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 
-class MemeSelectionItem extends Component{
+class MemeItem extends Component{
 
   constructor(){
     super();
@@ -32,4 +32,4 @@ class MemeSelectionItem extends Component{
   }
 }
 
-export default MemeSelectionItem
+export default MemeItem
