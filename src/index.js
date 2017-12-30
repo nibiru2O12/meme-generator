@@ -7,6 +7,7 @@ import RootReducers from './Reducers';
 import {fetch_memeData} from './Actions';
 
 import App from './Components/App';
+import './Styles/index.css';
 
 const store=createStore(RootReducers,applyMiddleware(thunk))
 store.subscribe(()=>console.log('subscribe : ',store.getState()));

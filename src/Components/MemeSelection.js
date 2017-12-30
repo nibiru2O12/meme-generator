@@ -6,12 +6,12 @@ class MemeSelection extends Component{
 
   render(){
     let {memes} = this.props;
+    console.log(this.props)
     return (
       memes.map(meme=>{
-        return (
-          <MemeSelectionItem key={meme.id}
-            name={meme.name}
-            url={meme.url}
+       return (
+          <MemeSelectionItem
+            key={meme.id} meme={meme}
           />
         )
       })
@@ -20,9 +20,7 @@ class MemeSelection extends Component{
 }
 
 const mapStateToProps = state =>{
-  return {
-    memes:state.memes
-  }
+  return state
 }
 
 export default connect(mapStateToProps,null)(MemeSelection);

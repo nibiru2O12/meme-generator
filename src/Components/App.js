@@ -5,7 +5,7 @@ import MemeSelection from './MemeSelection';
 class App extends Component{
   render(){
     return(
-      <div>
+      <div className="App">
         <h2>Welcome to the Meme Generator!</h2>
         <i>Write Some Text</i>
         <MemeGenerator />
