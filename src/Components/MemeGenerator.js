@@ -7,8 +7,8 @@ class MemeGenerator extends Component{
   constructor(){
     super();
     this.state={
-      'top-text':'',
-      'bottom-text':''
+      text0:'',
+      text1:''
     }
   }
 
@@ -23,7 +23,7 @@ class MemeGenerator extends Component{
           <FormGroup>
             <ControlLabel>Top</ControlLabel>{' '}
             <FormControl type='Text'
-              name='top-text'
+              name='text0'
               placeholder='top text'
               onChange={this.handleTextChange.bind(this)}
               value={this.state['top-text']}
@@ -32,7 +32,7 @@ class MemeGenerator extends Component{
           <FormGroup>
             <ControlLabel>Bottom </ControlLabel>{' '}
             <FormControl type="text"
-              name="bottom-text"
+              name="text1"
               placeholder="botton text"
               onChange={this.handleTextChange.bind(this)}
               value={this.state['bottom-text']}
