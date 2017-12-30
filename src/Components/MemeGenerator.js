@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import {Form,FormGroup,FormControl,ControlLabel,Button} from 'react-bootstrap';
 
 class MemeGenerator extends Component{
+  
   constructor(){
     super();
     this.state={
