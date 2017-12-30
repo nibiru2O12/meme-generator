@@ -23,12 +23,12 @@ export function fetch_memeData(){
 
 }
 
-function captionedMeme(meme){
+function captionedMeme(newMeme){
+  console.log('captioned',newMeme)
   const action={
     type:NEW_MEME,
-    meme
+    newMeme
   }
-  console.log('newMeme',meme);
   return action
 }
 
@@ -51,6 +51,6 @@ export function captionMeme(meme){
       body:bodyParams
     })
     .then(response => response.json())
-    .then(json => dispatch(captionedMeme(json)) )
+    .then(json => dispatch(captionedMeme(json.data)) )
   }
 }

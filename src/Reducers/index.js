@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import {FETCH_MEMEDATA} from '../Actions';
+import {FETCH_MEMEDATA,NEW_MEME} from '../Actions';
 
 function memes(state=[],action){
   switch (action.type) {
@@ -11,8 +11,18 @@ function memes(state=[],action){
   }
 }
 
+function myMemes(state=[],action){
+  switch (action.type) {
+  case NEW_MEME:
+    return [...state,action.newMeme]
+    break;
+  default:
+    return state
+  }
+}
+
 const RootReducers = combineReducers({
-  memes
+  memes,myMemes
 });
 
 export default RootReducers;
