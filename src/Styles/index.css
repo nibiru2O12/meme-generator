@@ -10,6 +10,8 @@ body{
   cursor: pointer;
   font-style: italic;
   padding: 10px;
+  display: block;
+  text-align: center;
 }
 
 .meme-item{

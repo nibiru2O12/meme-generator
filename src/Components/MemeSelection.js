@@ -1,20 +1,50 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
+import {Button} from 'react-bootstrap'
 import MemeItem from './MemeItem';
 
 class MemeSelection extends Component{
 
+  constructor(props){
+    super(props);
+    this.state={
+      limit:props.limit
+    }
+  }
+
+  handleLoadMore(){
+    const loadedImage = parseInt(this.state.limit);
+    const propsLimit = parseInt(this.props.limit);
+    this.setState({
+      limit: loadedImage + propsLimit
+    });
+
+    console.log('newLimit',this.state.limit);
+  }
+
   render(){
+    console.log(this.props);
     let {memes} = this.props;
-    console.log(this.props)
+    let {limit} = this.state;
+    console.log('memes:',memes)
+    let limitedMemes = memes.slice(0,limit);
+    console.log('sliced meme :',limit,limitedMemes)
     return (
-      memes.map(meme=>{
-       return (
-          <MemeItem
-            key={meme.id} meme={meme}
-          />
-        )
-      })
+      <div>
+        {
+          limitedMemes.map(meme=>{
+           return (
+                <MemeItem
+                  key={meme.id} meme={meme}
+                />
+            )
+          })
+        }
+        <div
+          className='meme-button'
+          onClick={this.handleLoadMore.bind(this)}
+          >load more...</div>
+      </div>
     )
   }
 }
