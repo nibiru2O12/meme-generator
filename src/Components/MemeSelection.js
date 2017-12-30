@@ -26,24 +26,30 @@ class MemeSelection extends Component{
     console.log(this.props);
     let {memes} = this.props;
     let {limit} = this.state;
-    console.log('memes:',memes)
     let limitedMemes = memes.slice(0,limit);
-    console.log('sliced meme :',limit,limitedMemes)
+    let LoadMore = (
+      <div
+        className='meme-button'
+        onClick={this.handleLoadMore.bind(this)}>
+        load more...
+      </div>
+    );
+
+    if(limit >= memes.length){
+        LoadMore=null;
+    }
+
     return (
       <div>
         {
           limitedMemes.map(meme=>{
            return (
-                <MemeItem
-                  key={meme.id} meme={meme}
-                />
+                <MemeItem key={meme.id} meme={meme}/>
             )
           })
         }
-        <div
-          className='meme-button'
-          onClick={this.handleLoadMore.bind(this)}
-          >load more...</div>
+        {LoadMore}
+
       </div>
     )
   }
